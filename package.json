@@ -1,0 +1,17 @@
+{
+  "name": "items-cache-api",
+  "version": "1.0.0",
+  "description": "Items REST API (Express + Postgres + Redis cache-aside) — starter dla kolokwium",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test src/*.test.js",
+    "lint": "bash scripts/lint.sh",
+    "build": "mkdir -p dist && cp src/server.js src/validate.js dist/"
+  },
+  "dependencies": {
+    "express": "4.19.2",
+    "pg": "8.12.0",
+    "redis": "4.7.0"
+  }
+}
