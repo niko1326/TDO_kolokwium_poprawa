@@ -59,3 +59,7 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/items-cache-api:latest
             ghcr.io/${{ github.repository_owner }}/items-cache-api:${{ github.sha }}
+  test:
+    steps:
+      - name: testing
+        run: echo "hello world"
