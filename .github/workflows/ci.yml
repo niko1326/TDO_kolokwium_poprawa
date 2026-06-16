@@ -60,6 +60,7 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/items-cache-api:latest
             ghcr.io/${{ github.repository_owner }}/items-cache-api:${{ github.sha }}
   hello_world:
+    runs-on: ubuntu-latest
     steps:
       - name: testing
         run: echo "hello world"
