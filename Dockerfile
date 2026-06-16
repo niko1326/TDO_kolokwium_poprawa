@@ -1,18 +1,20 @@
 # Multi-stage Dockerfile
 
-FROM node:20 AS builder
+FROM node:20-alpine AS builder
 WORKDIR /usr/src/app
 
 # Install dependencies early to maximize layer caching
-COPY package.json package-lock.json* ./
-RUN npm ci
+COPY package*.json ./
 
-# Copy source and build artifact
+# Install build deps and dependencies (cacheable), then copy source and build
+RUN apk add --no-cache --virtual .build-deps build-base python3 git \
+	&& npm install
+
+# Copy source files and run build (needs source present)
 COPY . .
-RUN npm run build
-
-# Remove dev dependencies so node_modules contains only production deps
-RUN npm prune --production
+RUN npm run build \
+	&& npm prune --production \
+	&& apk del .build-deps
 
 FROM node:20-alpine AS runner
 WORKDIR /usr/src/app
